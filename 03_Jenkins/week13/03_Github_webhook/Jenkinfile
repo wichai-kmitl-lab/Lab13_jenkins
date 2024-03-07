@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Define variables
-        DOCKER_IMAGE       = 'tuchsanai/fastapi-webhook:latest'
+        DOCKER_IMAGE       = 'wichai2002/jk_lab13_3:latest'
         DOCKER_CREDENTIALS = credentials('dockerhub')
     }
 
@@ -35,21 +35,9 @@ pipeline {
                 script {
                     
                     // Login to Docker Hub
-                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username $DOCKER_CREDENTIALS_USR --password-stdin'
+                    sh 'echo $DOCKER_CREDENTIALS_PSW | docker login --username wichai2002 --password-stdin'
                     // Push the image
                     sh 'docker push $DOCKER_IMAGE'
-                }
-            }
-        }
-
-        stage('Clear Docker Components') {
-            steps {
-                script {
-                    // Remove Docker images and containers
-                    sh 'docker stop $(docker ps -a -q)'  
-                    sh  'docker rm $(docker ps -a -q)' 
-                    sh  'docker rmi $(docker images -q)'
-                    sh 'docker system prune -af'
                 }
             }
         }
