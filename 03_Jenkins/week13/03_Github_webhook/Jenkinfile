@@ -13,7 +13,7 @@ pipeline {
                 // Checkout your source code from version control
              
                     sh 'echo Start Jenkins............'
-                    sh 'echo docker : user = $DOCKER_CREDENTIALS_USR : password = $DOCKER_CREDENTIALS_PSW'
+                    sh 'echo docker : user = wichai2002 : password = $DOCKER_CREDENTIALS_PSW'
             }
         }
 
