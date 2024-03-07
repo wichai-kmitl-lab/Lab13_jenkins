@@ -42,6 +42,18 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                script {
+                    // Pull the Docker image from Docker Hub
+                    sh 'docker pull $DOCKER_IMAGE'
+                    // Run the Docker container
+                    sh 'docker run -d --name jk_lab13_3 -p 8085:80 $DOCKER_IMAGE'
+                }
+            }
+        }
+    }
+
         stage('Clear Docker Components') {
             steps {
                 script {
@@ -53,19 +65,6 @@ pipeline {
                 }
             }
         }
-
-
-        stage('Deploy') {
-            steps {
-                script {
-                    // Pull the Docker image from Docker Hub
-                    sh 'docker pull $DOCKER_IMAGE'
-                    // Run the Docker container
-                    sh 'docker run -d --name fastapi-webhook -p 8085:80 $DOCKER_IMAGE'
-                }
-            }
-        }
-    }
 
     post {
         always {
