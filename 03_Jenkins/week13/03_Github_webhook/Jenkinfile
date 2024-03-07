@@ -45,7 +45,7 @@ pipeline {
         stage('Clear Docker Components') {
             steps {
                 script {
-                    // Remove Docker images and containers
+                    // Remove Docker images and containerssss
                     sh 'docker stop $(docker ps -a -q)'  
                     sh  'docker rm $(docker ps -a -q)' 
                     sh  'docker rmi $(docker images -q)'
